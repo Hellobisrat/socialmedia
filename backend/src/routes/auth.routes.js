@@ -1,37 +1,11 @@
-import multer from "multer";
-import path from "path";
+import express from "express";
+import { register, login, getMe } from "../controllers/auth.controller.js";
+import { protect } from "../middleware/auth.middleware.js";
 
-// Storage engine
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename(req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-    );
-  },
-});
+const router = express.Router();
 
-// File filter (images + videos)
-function checkFileType(file, cb) {
-  const filetypes = /jpg|jpeg|png|gif|mp4|mov|avi/;
-  const extname = filetypes.test(
-    path.extname(file.originalname).toLowerCase()
-  );
-  const mimetype = filetypes.test(file.mimetype);
+router.post("/register", register);
+router.post("/login", login);
+router.get("/me", protect, getMe);
 
-  if (extname && mimetype) {
-    cb(null, true);
-  } else {
-    cb("Invalid file type");
-  }
-}
-
-export const upload = multer({
-  storage,
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  },
-});
+export default router;
