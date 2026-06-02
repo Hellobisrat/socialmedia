@@ -18,6 +18,7 @@ export const createComment = async (req, res) => {
 
     // Increase comment count on post
     post.commentCount += 1;
+    post.comments.push(comment._id);
     await post.save();
 
     res.status(201).json(comment);
