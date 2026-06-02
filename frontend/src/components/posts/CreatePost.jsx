@@ -37,6 +37,7 @@ export default function CreatePost({ onSubmit }) {
         <div className="relative mt-3">
           <img
             src={preview}
+            alt="preview"
             className="rounded-lg max-h-64 object-cover w-full"
           />
           <button

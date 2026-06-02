@@ -10,6 +10,7 @@ export default function PostCard({ post, onLike, onComment }) {
       <div className="flex items-center gap-3 mb-3">
         <img
           src={post.user.avatar}
+          alt="avatar"
           className="w-10 h-10 rounded-full object-cover"
         />
         <div>
@@ -23,6 +24,7 @@ export default function PostCard({ post, onLike, onComment }) {
       {post.media && (
         <img
           src={post.media}
+          alt="media"
           className="rounded-lg mb-3 max-h-[500px] w-full object-cover"
         />
       )}

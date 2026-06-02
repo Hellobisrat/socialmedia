@@ -24,12 +24,15 @@ export const register = async (req, res) => {
     });
 
     // Return user + token
-    res.status(201).json({
-      _id: user._id,
-      name: user.username,
-      email: user.email,
-      token: generateToken(user._id),
-    });
+res.status(201).json({
+  user: {
+    _id: user._id,
+    username: user.username,
+    email: user.email,
+  },
+  token: generateToken(user._id),
+});
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -50,12 +53,15 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
 
     // Return user + token
-    res.json({
-      _id: user._id,
-      name: user.username,
-      email: user.email,
-      token: generateToken(user._id),
-    });
+   res.status(201).json({
+  user: {
+    _id: user._id,
+    username: user.username,
+    email: user.email,
+  },
+  token: generateToken(user._id),
+});
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

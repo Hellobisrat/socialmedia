@@ -1,10 +1,13 @@
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function Login() {
+  const navigate = useNavigate()
   const handleLogin = (e) => {
     e.preventDefault();
+    navigate('/')
     toast.success("Logged in!");
   };
 
