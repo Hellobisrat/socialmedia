@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { UserPlus, UserCheck } from "lucide-react";
 
-export default function User({ user, onFollow, onUnfollow }) {
-  const [isFollowing, setIsFollowing] = useState(user.isFollowing);
+export default function User({ user, currentUserId, onFollow, onUnfollow }) {
+  const [isFollowing, setIsFollowing] = useState(
+    user.followers?.includes(currentUserId)
+  );
 
   const handleFollow = () => {
     if (isFollowing) {
@@ -18,13 +20,13 @@ export default function User({ user, onFollow, onUnfollow }) {
     <div className="flex items-center justify-between bg-white p-3 rounded-xl shadow-sm mb-2">
       <div className="flex items-center gap-3">
         <img
-          src={user.avatar}
+          src={user.avatar || "/default-avatar.png"}
           className="w-12 h-12 rounded-full object-cover"
         />
 
         <div>
           <p className="font-semibold">{user.username}</p>
-          <p className="text-sm text-gray-500">{user.fullName}</p>
+          <p className="text-sm text-gray-500">{user.bio || ""}</p>
         </div>
       </div>
 
