@@ -1,8 +1,14 @@
-export default function ProfilePage() {
+import { useState } from "react";
+import ChatList from "./ChatList";
+import ChatWindow from "./ChatWindow";
+
+export default function ChatPage() {
+  const [selected, setSelected] = useState(null);
+
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold">Profile Page</h1>
-      <p>This is where the user profile will be displayed.</p>
+    <div className="flex h-[calc(100vh-70px)] bg-white rounded-xl shadow">
+      <ChatList onSelect={setSelected} />
+      <ChatWindow conversation={selected} />
     </div>
   );
 }
