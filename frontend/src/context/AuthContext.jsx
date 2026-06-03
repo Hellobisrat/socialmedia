@@ -17,9 +17,7 @@ export function AuthProvider({ children }) {
       }
 
       try {
-        const res = await axios.get("/auth/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get("/auth/me");
         setUser(res.data);
       } catch (err) {
         console.error("Auth error:", err);
@@ -33,17 +31,25 @@ export function AuthProvider({ children }) {
   }, [token]);
 
   const login = async (email, password) => {
-    const res = await axios.post("/auth/login", { email, password });
-    setToken(res.data.token);
-    localStorage.setItem("token", res.data.token);
-    setUser(res.data.user);
+    try {
+      const res = await axios.post("/auth/login", { email, password });
+      setToken(res.data.token);
+      localStorage.setItem("token", res.data.token);
+      setUser(res.data.user);
+    } catch (err) {
+      throw err.response?.data?.message || "Login failed";
+    }
   };
 
   const register = async (data) => {
-    const res = await axios.post("/auth/register", data);
-    setToken(res.data.token);
-    localStorage.setItem("token", res.data.token);
-    setUser(res.data.user);
+    try {
+      const res = await axios.post("/auth/register", data);
+      setToken(res.data.token);
+      localStorage.setItem("token", res.data.token);
+      setUser(res.data.user);
+    } catch (err) {
+      throw err.response?.data?.message || "Registration failed";
+    }
   };
 
   const logout = () => {
@@ -61,7 +67,7 @@ export function AuthProvider({ children }) {
         login,
         register,
         logout,
-        isAuthenticated: !!user,
+        isAuthenticated: !!token,
       }}
     >
       {children}
