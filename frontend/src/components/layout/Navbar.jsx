@@ -10,6 +10,17 @@ export default function Navbar() {
 const [notifications, setNotifications] = useState([]);
 const [unreadMessages, setUnreadMessages] = useState(0);
 
+const [unreadNotifications, setUnreadNotifications] = useState(0);
+
+useEffect(() => {
+  const loadUnread = async () => {
+    const res = await axios.get("/notifications/unread/count");
+    setUnreadNotifications(res.data.count);
+  };
+  loadUnread();
+}, []);
+
+
   
 useEffect(() => {
   const loadNotifications = async () => {
@@ -69,12 +80,13 @@ useEffect(() => {
           </span>
         </button><button onClick={() => navigate("/notifications")} className="hover:text-primary relative">
   <Bell size={22} />
+{unreadNotifications > 0 && (
+  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 rounded-full">
+    {unreadNotifications}
+  </span>
+)}
 
-  {notifications.length > 0 && (
-    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 rounded-full">
-      {notifications.length}
-    </span>
-  )}
+
 </button>
 
 

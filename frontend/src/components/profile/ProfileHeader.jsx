@@ -1,5 +1,6 @@
 import { Heart, MessageCircle } from "lucide-react";
-import Comments from "./Comments";
+import Comments from "../posts/Comments";
+
 import { useState } from "react";
 
 export default function PostCard({ post, onLike, onComment }) {

@@ -96,7 +96,7 @@ export const markAsRead = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-exports.getUnreadCount = async (req, res) => {
+export const getUnreadCount = async (req, res) => {
   try {
     const count = await Message.countDocuments({
       receiver: req.user._id,

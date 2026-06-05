@@ -1,6 +1,7 @@
 import { useState } from "react";
-import ChatList from "./ChatList";
-import ChatWindow from "./ChatWindow";
+import ChatList from "../../components/chat/ChatList";
+import ChatWindow from "../../components/chat/ChatWindow";
+
 
 export default function ChatPage() {
   const [selected, setSelected] = useState(null);
