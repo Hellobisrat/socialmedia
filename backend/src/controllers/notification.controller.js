@@ -40,7 +40,7 @@ export const getNotifications = async (req, res) => {
       .populate("message", "text attachment")
       .sort({ createdAt: -1 });
 
-    res.json(notifications);
+    res.status(200).json(notifications);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -99,3 +99,20 @@ export const deleteNotification = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getUnreadCount = async (req, res) => {
+  try {
+    const count = await Notification.countDocuments({
+      user: req.user._id,
+      read: false
+    });
+
+    res.json({ count });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+
+

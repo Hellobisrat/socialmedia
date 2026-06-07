@@ -136,3 +136,15 @@ export const searchByHashtag = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getAllPosts = async (req, res) => {
+  try {
+    const posts = await Post.find()
+      .populate("user", "username avatar")
+      .sort({ createdAt: -1 });
+
+    res.json(posts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

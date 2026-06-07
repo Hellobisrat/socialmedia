@@ -7,6 +7,7 @@ import {
   updatePost,
   deletePost,
   searchByHashtag,
+  getAllPosts
 } from "../controllers/post.controller.js";
 import { protect } from "../middleware/auth.middleware.js";
 
@@ -19,5 +20,7 @@ router.get("/search/:tag", protect, searchByHashtag);
 router.get("/:postId", protect, getPost);
 router.put("/:postId", protect, updatePost);
 router.delete("/:postId", protect, deletePost);
+router.get("/", protect, getAllPosts);
+
 
 export default router;

@@ -5,7 +5,7 @@ import generateToken from "../utils/generateToken.js";
 // REGISTER USER
 export const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+   const { username, email, password } = req.body;
 
     // Check if user exists
     const userExists = await User.findOne({ email });
@@ -18,7 +18,7 @@ export const register = async (req, res) => {
 
     // Create user
     const user = await User.create({
-      username: name, // using "name" as username
+      username, // using "name" as username
       email,
       password: hashedPassword,
     });

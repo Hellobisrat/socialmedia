@@ -4,6 +4,8 @@ import { useAuth } from "../../context/AuthContext";
 import { useEffect,useState } from "react";
 import axios from "../../utils/instance";
 
+
+
 export default function Navbar() {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -72,21 +74,14 @@ useEffect(() => {
         </div>
 
         {/* Notifications */}
-        <button onClick={() => navigate("/notifications")} className="hover:text-primary relative">
-          <Bell size={22} />
-          {/* Unread badge */}
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 rounded-full">
-            3
-          </span>
-        </button><button onClick={() => navigate("/notifications")} className="hover:text-primary relative">
+        {/* Notifications */}
+<button onClick={() => navigate("/notifications")} className="hover:text-primary relative">
   <Bell size={22} />
-{unreadNotifications > 0 && (
-  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 rounded-full">
-    {unreadNotifications}
-  </span>
-)}
-
-
+  {unreadNotifications > 0 && (
+    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 rounded-full">
+      {unreadNotifications}
+    </span>
+  )}
 </button>
 
 

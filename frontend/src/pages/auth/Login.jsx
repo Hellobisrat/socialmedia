@@ -4,6 +4,8 @@ import Button from "../../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -48,6 +50,13 @@ export default function Login() {
 
           <Button className="w-full">Login</Button>
         </form>
+        <p className="text-sm text-gray-600 mt-3">
+  Don’t have an account?
+  <Link to="/register" className="text-primary font-semibold ml-1">
+    Create one
+  </Link>
+</p>
+
       </div>
     </div>
   );
